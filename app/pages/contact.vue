@@ -23,8 +23,8 @@
     <div class="flex w-full justify-between">
       <b>GitHub</b>
       <p>
-        <a href="https://github.com/brano-hozza" target="_blank">
-          brano-hozza
+        <a href="https://github.com/bran0h" target="_blank">
+          bran0h
         </a>
       </p>
     </div>
