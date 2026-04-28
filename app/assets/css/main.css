@@ -1,55 +1,125 @@
+:root,
+html.dark {
+  --bg: #07090e;
+  --bg2: #0d1018;
+  --bg3: #131720;
+  --fg: #e2e6f0;
+  --fg2: #8a90a0;
+  --fg3: #454c5e;
+  --accent: oklch(0.78 0.18 145);
+  --accent-dim: oklch(0.78 0.18 145 / 0.15);
+  --accent-mid: oklch(0.78 0.18 145 / 0.4);
+  --border: rgba(255, 255, 255, 0.07);
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+html.light {
+  --bg: #f5f6fa;
+  --bg2: #eceef5;
+  --bg3: #e2e4ee;
+  --fg: #0d1018;
+  --fg2: #454c5e;
+  --fg3: #8a90a0;
+  --accent: oklch(0.52 0.18 145);
+  --accent-dim: oklch(0.52 0.18 145 / 0.12);
+  --accent-mid: oklch(0.52 0.18 145 / 0.35);
+  --border: rgba(0, 0, 0, 0.08);
+}
+
 html {
+  scroll-behavior: smooth;
   overflow: hidden;
   height: 100%;
 }
 
-* {
-  font-family: "JetBrains Mono";
-}
-
 body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-display);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
   height: 100%;
   overflow: auto;
-  --color-primary: 245 171 0;
-  --text-primary: 255 255 255;
 }
 
-h1 {
-  @apply text-6xl font-bold;
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.5;
 }
 
-h2 {
-  @apply text-4xl font-bold;
+html.light body::before {
+  opacity: 0.2;
 }
 
-h3 {
-  @apply text-2xl font-bold;
+::-webkit-scrollbar {
+  width: 3px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--fg3);
+  border-radius: 2px;
 }
 
-h4 {
-  @apply text-xl font-bold;
+::selection {
+  background: var(--accent-dim);
+  color: var(--accent);
 }
 
-h5 {
-  @apply text-lg font-bold;
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-h6 {
-  @apply text-base font-bold;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-p {
-  @apply text-justify text-base;
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
-a {
-  @apply text-base text-primary;
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
 }
 
-small {
-  @apply text-sm;
-}
-
-b {
-  @apply font-bold;
+.scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(transparent, var(--accent-dim), transparent);
+  animation: scanline 8s linear infinite;
+  pointer-events: none;
+  z-index: 999;
 }

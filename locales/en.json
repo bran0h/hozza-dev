@@ -1,0 +1,8 @@
+{
+  "common": {
+    "hello": "Hello, {name}!",
+    "create": "Create",
+    "save": "Save",
+    "next": "Next"
+  }
+}

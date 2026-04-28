@@ -1,5 +1,5 @@
 <template>
-  <header class="flex w-full justify-between bg-accent p-2">
+  <header class="bg-bg2 flex w-full justify-between p-2">
     <span class="font-mono text-xl">hozza.dev</span>
     <nav class="flex items-center gap-x-4">
       <nuxt-link
