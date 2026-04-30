@@ -76,7 +76,7 @@ function delay(d: number) {
       <div :style="delay(0.7)" class="flex flex-wrap gap-4">
         <a
           href="#stack"
-          class="bg-accent font-code block rounded-[4px] px-7 py-3 text-[13px] font-bold tracking-[0.05em] text-[#07090e] no-underline transition-opacity hover:opacity-85"
+          class="bg-primary font-code text-bg block rounded-[4px] px-7 py-3 text-[13px] font-bold tracking-[0.05em] no-underline transition-opacity hover:opacity-85"
         >
           view stack
         </a>

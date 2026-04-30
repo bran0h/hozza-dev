@@ -8,6 +8,9 @@
   --color-fg: var(--fg);
   --color-fg2: var(--fg2);
   --color-fg3: var(--fg3);
+  --color-primary: var(--primary);
+  --color-primary-dim: var(--primary-dim);
+  --color-primary-mid: var(--primary-mid);
   --color-accent: var(--accent);
   --color-accent-dim: var(--accent-dim);
   --color-accent-mid: var(--accent-mid);

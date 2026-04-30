@@ -1,20 +1,36 @@
 <script setup lang="ts">
 const colorMode = useColorMode();
+const mounted = ref(false);
 const isDark = computed(() => colorMode.value === "dark");
 
 function toggle() {
   colorMode.preference = isDark.value ? "light" : "dark";
 }
+
+onMounted(() => {
+  mounted.value = true;
+});
+
+const ariaLabel = computed(() =>
+  !mounted.value
+    ? "Toggle color theme"
+    : isDark.value
+      ? "Switch to light mode"
+      : "Switch to dark mode",
+);
 </script>
 
 <template>
   <button
     class="theme-toggle"
-    :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+    type="button"
+    :aria-label="ariaLabel"
     @click="toggle"
   >
+    <!-- Icon deferred until mount so SSR and client markup match (color mode resolves after hydration). -->
+    <span v-if="!mounted" class="theme-toggle-placeholder" aria-hidden="true" />
     <svg
-      v-if="isDark"
+      v-else-if="isDark"
       xmlns="http://www.w3.org/2000/svg"
       width="15"
       height="15"
@@ -66,5 +82,11 @@ function toggle() {
 .theme-toggle:hover {
   border-color: var(--accent);
   color: var(--accent);
+}
+
+.theme-toggle-placeholder {
+  display: block;
+  width: 15px;
+  height: 15px;
 }
 </style>

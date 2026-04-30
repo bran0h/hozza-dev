@@ -1,8 +1,8 @@
 <template>
   <span class="flex w-full items-center justify-between gap-2">
-    <span class="block h-1 w-full bg-accent" />
+    <span class="bg-primary block h-1 w-full" />
     <slot />
-    <span class="block h-1 w-full bg-accent" />
+    <span class="bg-primary block h-1 w-full" />
   </span>
 </template>
 
