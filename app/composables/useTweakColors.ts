@@ -1,3 +1,5 @@
+import { refreshTerminalFavicon } from "../../utils/terminal-favicon";
+
 const STORAGE_KEY = "hozza-dev:tweak-colors";
 const DEFAULT_PRIMARY_DARK_HEX = "#fff700";
 const DEFAULT_PRIMARY_LIGHT_HEX = "#bd0000";
@@ -62,6 +64,7 @@ export function useTweakColors() {
       "--primary",
       isEffectiveDark() ? primaryDarkHex.value : primaryLightHex.value,
     );
+    refreshTerminalFavicon();
   }
 
   function persist() {
@@ -140,6 +143,7 @@ export function useTweakColors() {
     syncPickersFromCss();
     const hadSaved = load();
     if (hadSaved) applyPrimaryForCurrentMode();
+    else refreshTerminalFavicon();
     hydrated.value = true;
   });
 
