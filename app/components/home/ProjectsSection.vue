@@ -5,26 +5,50 @@ const projects = [
   {
     title: "Liftag",
     desc: "Gym workout tracking app — scan a QR code on any machine to auto-load exercises, log sets, and sync completed workouts to Strava. React Native mobile app backed by an AdonisJS API and a Nuxt gym-owner dashboard.",
-    tags: ["React Native", "Expo", "AdonisJS", "PostgreSQL", "Nuxt"],
+    tags: ["Expo", "AdonisJS", "PostgreSQL", "Nuxt"],
     status: "active",
   },
   {
     title: "CardioElite",
-    desc: "Fitness platform focused on cardio training and performance tracking. Built for athletes who want structured programmes and measurable progress.",
-    tags: ["TypeScript", "Vue", "AdonisJS"],
+    desc: "Cardiology platform for risk assessment and personalized lipid-lowering therapy recommendations",
+    tags: ["TypeScript", "Nuxt", "AdonisJS"],
     status: "active",
   },
   {
-    title: "hozza.dev",
-    desc: "Personal portfolio and blog — the site you're looking at. Built to be fast and minimal.",
-    tags: ["Nuxt", "TypeScript", "Tailwind"],
+    title: "OVB",
+    desc: "Developing web and mobile apps for financial institutions",
+    tags: ["TypeScript", "Nuxt", "AdonisJS", "LangChain", "Expo", "Monorepo"],
     status: "active",
   },
   {
-    title: "Rust Game Engine",
-    desc: "Exploring game development with Bevy in Rust. Currently learning ECS architecture and 2D rendering.",
-    tags: ["Rust", "Bevy", "ECS"],
-    status: "learning",
+    title: "dotmemo.xyz",
+    desc: "Sharing tokenized memories with your friends",
+    tags: ["TypeScript", "Nuxt", "Web3", "Cloudflare"],
+    status: "inactive",
+  },
+  {
+    title: "meta-assets",
+    desc: "Polkadot solution for game asset representation on-chain",
+    tags: ["TypeScript", "Nuxt", "Polkadot", "Substrate", "Rust"],
+    status: "inactive",
+  },
+  {
+    title: "Zhar",
+    desc: "Zhar is a social platform for tokenized real-life challenges.",
+    tags: ["TypeScript", "Expo", "Web3", "Ethereum"],
+    status: "inactive",
+  },
+  {
+    title: "Crypto-estate",
+    desc: "Crypto-estate is a platform for buying and selling real estate with crypto",
+    tags: ["TypeScript", "Nuxt", "Web3", "Cloudflare"],
+    status: "inactive",
+  },
+  {
+    title: "Tokengram",
+    desc: "Tokengram is a platform for creating and sharing tokenized content",
+    tags: ["TypeScript", "Nuxt", "Graph databases", "AI", "Web3"],
+    status: "inactive",
   },
 ].map((p, i) => {
   const { el, visible } = useVisible();
@@ -114,14 +138,17 @@ const projects = [
 .project-card:hover {
   border-color: rgba(255, 255, 255, 0.12);
 }
+
 html.light .project-card:hover {
   border-color: rgba(0, 0, 0, 0.18);
 }
+
 .card-overlay {
   background: linear-gradient(135deg, var(--accent-dim) 0%, transparent 60%);
   opacity: 0;
   transition: opacity 0.2s;
 }
+
 .project-card:hover .card-overlay {
   opacity: 1;
 }

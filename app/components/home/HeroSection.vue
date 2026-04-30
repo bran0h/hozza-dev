@@ -2,9 +2,9 @@
 const role = useTypewriter(
   [
     "full-stack developer",
-    "game dev enthusiast",
-    "rust learner",
     "open source builder",
+    "AI enthusiast",
+    "web3 solutions",
   ],
   75,
   2200,
@@ -70,7 +70,7 @@ function delay(d: number) {
       >
         Building for the web and beyond. Based in
         <span class="text-fg">Slovakia</span>, currently hacking on full-stack
-        apps and game engines in Rust.
+        apps and AI solutions.
       </p>
 
       <div :style="delay(0.7)" class="flex flex-wrap gap-4">

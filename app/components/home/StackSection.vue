@@ -7,6 +7,7 @@ const groups = [
     title: "backend",
     items: [
       "AdonisJS",
+      "LangChain",
       "Express",
       "PostgreSQL",
       "MSSQL",
@@ -20,7 +21,7 @@ const groups = [
     title: "devops",
     items: ["Docker", "Kubernetes", "CI/CD", "GitHub", "GitLab"],
   },
-  { title: "game dev", items: ["Rust", "Bevy"] },
+  { title: "game dev", items: ["Rust", "Bevy", "Godot", "Unity"] },
 ].map((g, i) => {
   const { el, visible } = useVisible();
   return { ...g, el, visible, delay: i * 0.1 };
