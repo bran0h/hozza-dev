@@ -43,7 +43,7 @@ const groups = [
       :class="headerVisible ? 'opacity-100' : 'opacity-0'"
     >
       <div class="font-code text-fg3 mb-3 text-[12px] tracking-[0.1em]">
-        <span class="text-accent">01</span> / 03
+        <span class="text-accent">01</span> / 04
       </div>
       <h2
         class="text-[clamp(36px,5vw,72px)] leading-none font-bold tracking-[-0.04em]"

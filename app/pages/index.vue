@@ -13,6 +13,7 @@
     <HomeHeroSection />
     <HomeStackSection />
     <HomeProjectsSection />
+    <HomeHobbyProjectsSection />
     <HomeContactSection />
     <SiteFooter />
   </div>

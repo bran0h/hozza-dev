@@ -28,7 +28,7 @@ function copyEmail() {
       "
     >
       <div class="font-code text-fg3 mb-3 text-[12px] tracking-[0.1em]">
-        <span class="text-accent">03</span> / 03
+        <span class="text-accent">04</span> / 04
       </div>
       <h2
         class="mb-7 text-[clamp(36px,5vw,72px)] leading-none font-bold tracking-[-0.04em]"

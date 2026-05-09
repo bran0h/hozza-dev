@@ -3,52 +3,10 @@ const { el: headerEl, visible: headerVisible } = useVisible();
 
 const projects = [
   {
-    title: "Liftag",
-    desc: "Gym workout tracking app — scan a QR code on any machine to auto-load exercises, log sets, and sync completed workouts to Strava. React Native mobile app backed by an AdonisJS API and a Nuxt gym-owner dashboard.",
-    tags: ["Expo", "AdonisJS", "PostgreSQL", "Nuxt"],
-    status: "active",
-  },
-  {
-    title: "CardioElite",
-    desc: "Cardiology platform for risk assessment and personalized lipid-lowering therapy recommendations",
-    tags: ["TypeScript", "Nuxt", "AdonisJS"],
-    status: "active",
-  },
-  {
-    title: "OVB",
-    desc: "Developing web and mobile apps for financial institutions",
-    tags: ["TypeScript", "Nuxt", "AdonisJS", "LangChain", "Expo", "Monorepo"],
-    status: "active",
-  },
-  {
-    title: "dotmemo.xyz",
-    desc: "Sharing tokenized memories with your friends",
-    tags: ["TypeScript", "Nuxt", "Web3", "Cloudflare"],
-    status: "inactive",
-  },
-  {
-    title: "meta-assets",
-    desc: "Polkadot solution for game asset representation on-chain",
-    tags: ["TypeScript", "Nuxt", "Polkadot", "Substrate", "Rust"],
-    status: "inactive",
-  },
-  {
-    title: "Zhar",
-    desc: "Zhar is a social platform for tokenized real-life challenges.",
-    tags: ["TypeScript", "Expo", "Web3", "Ethereum"],
-    status: "inactive",
-  },
-  {
-    title: "Crypto-estate",
-    desc: "Crypto-estate is a platform for buying and selling real estate with crypto",
-    tags: ["TypeScript", "Nuxt", "Web3", "Cloudflare"],
-    status: "inactive",
-  },
-  {
-    title: "Tokengram",
-    desc: "Tokengram is a platform for creating and sharing tokenized content",
-    tags: ["TypeScript", "Nuxt", "Graph databases", "AI", "Web3"],
-    status: "inactive",
+    title: "opti-music",
+    desc: "Play music with your hands — uses your webcam and MediaPipe hand tracking to detect finger distance and map it to notes in real time. No instrument needed.",
+    tags: ["Nuxt", "TypeScript", "MediaPipe", "Tone.js"],
+    url: "https://opti-music.vercel.app/",
   },
 ].map((p, i) => {
   const { el, visible } = useVisible();
@@ -58,7 +16,7 @@ const projects = [
 
 <template>
   <section
-    id="projects"
+    id="hobby-projects"
     class="bg-bg2 relative px-6 py-24 sm:px-8 sm:py-28 lg:px-12 lg:py-[120px]"
   >
     <div
@@ -71,23 +29,26 @@ const projects = [
       :class="headerVisible ? 'opacity-100' : 'opacity-0'"
     >
       <div class="font-code text-fg3 mb-3 text-[12px] tracking-[0.1em]">
-        <span class="text-accent">02</span> / 04
+        <span class="text-accent">03</span> / 04
       </div>
       <h2
         class="text-[clamp(36px,5vw,72px)] leading-none font-bold tracking-[-0.04em]"
       >
-        Projects<span class="text-accent">.</span>
+        Hobby projects<span class="text-accent">.</span>
       </h2>
     </div>
 
     <div
       class="grid max-w-[1100px] grid-cols-1 gap-5 sm:gap-6 md:grid-cols-[repeat(auto-fit,minmax(300px,1fr))]"
     >
-      <div
+      <a
         v-for="project in projects"
         :key="project.title"
         :ref="(el) => (project.el.value = el as HTMLElement)"
-        class="project-card bg-bg2 relative cursor-default overflow-hidden rounded-[8px] border border-[var(--border)] p-6 sm:p-8"
+        :href="project.url"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="project-card bg-bg2 relative overflow-hidden rounded-[8px] border border-[var(--border)] p-6 no-underline sm:p-8"
         :style="{
           opacity: project.visible.value ? 1 : 0,
           transform: project.visible.value
@@ -102,18 +63,11 @@ const projects = [
         />
 
         <div class="mb-4 flex items-start justify-between">
-          <h3 class="text-[20px] font-semibold tracking-[-0.02em]">
+          <h3 class="text-fg text-[20px] font-semibold tracking-[-0.02em]">
             {{ project.title }}
           </h3>
-          <span
-            class="font-code rounded-[20px] px-[10px] py-[3px] text-[11px]"
-            :class="
-              project.status === 'active'
-                ? 'bg-accent-dim text-accent border-accent-mid border'
-                : 'bg-bg3 text-fg3 border border-[var(--border)]'
-            "
-          >
-            {{ project.status }}
+          <span class="font-code text-fg3 flex items-center gap-1 text-[11px]">
+            ↗
           </span>
         </div>
 
@@ -129,7 +83,7 @@ const projects = [
             >{{ tag }}</span
           >
         </div>
-      </div>
+      </a>
     </div>
   </section>
 </template>
