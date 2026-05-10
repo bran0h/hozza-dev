@@ -6,7 +6,7 @@ const projects = [
     title: "opti-music",
     desc: "Play music with your hands — uses your webcam and MediaPipe hand tracking to detect finger distance and map it to notes in real time. No instrument needed.",
     tags: ["Nuxt", "TypeScript", "MediaPipe", "Tone.js"],
-    url: "https://opti-music.vercel.app/",
+    url: "https://opti-music.hozza.dev/",
   },
 ].map((p, i) => {
   const { el, visible } = useVisible();
