@@ -3,10 +3,16 @@ const { el: headerEl, visible: headerVisible } = useVisible();
 
 const projects = [
   {
-    title: "opti-music",
+    title: "Opti-Music",
     desc: "Play music with your hands — uses your webcam and MediaPipe hand tracking to detect finger distance and map it to notes in real time. No instrument needed.",
     tags: ["Nuxt", "TypeScript", "MediaPipe", "Tone.js"],
     url: "https://opti-music.hozza.dev/",
+  },
+  {
+    title: "Quantumania",
+    desc: "Learn & Try quantum computing straight from your browser",
+    tags: ["Nuxt", "TypeScript"],
+    url: "https://quantumania.hozza.dev/",
   },
 ].map((p, i) => {
   const { el, visible } = useVisible();
