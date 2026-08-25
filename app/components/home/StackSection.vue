@@ -1,15 +1,19 @@
 <script setup lang="ts">
-const { el: headerEl, visible: headerVisible } = useVisible();
-
+/** Read as a sentence, not a wall of pills — order is roughly how often I reach for it. */
 const groups = [
-  { title: "frontend", items: ["TypeScript", "Vue", "Nuxt", "Tailwind CSS"] },
   {
-    title: "backend",
+    title: "Frontend",
+    items: ["TypeScript", "Vue", "Nuxt", "Tailwind CSS", "React Native / Expo"],
+  },
+  {
+    title: "Backend",
     items: [
       "AdonisJS",
-      "LangChain",
       "Express",
+      "LangChain",
+      "AWS Bedrock",
       "PostgreSQL",
+      "Supabase",
       "MSSQL",
       "MongoDB",
       ".NET",
@@ -18,68 +22,35 @@ const groups = [
     ],
   },
   {
-    title: "devops",
-    items: ["Docker", "Kubernetes", "CI/CD", "GitHub", "GitLab"],
+    title: "Infrastructure",
+    items: ["Docker", "Kubernetes", "R2 / S3", "CI/CD", "GitHub", "GitLab"],
   },
-  { title: "game dev", items: ["Rust", "Bevy", "Godot", "Unity"] },
-].map((g, i) => {
-  const { el, visible } = useVisible();
-  return { ...g, el, visible, delay: i * 0.1 };
-});
+  {
+    title: "After hours",
+    items: ["Rust", "Bevy", "Godot", "Unity"],
+  },
+];
 </script>
 
 <template>
-  <section
-    id="stack"
-    class="relative px-6 py-24 sm:px-8 sm:py-28 lg:px-12 lg:py-[120px]"
-  >
-    <div
-      class="absolute top-0 right-6 left-6 h-px bg-[var(--border)] sm:right-8 sm:left-8 lg:right-12 lg:left-12"
-    />
+  <section id="toolkit" class="shell scroll-mt-24 pt-20 sm:pt-28">
+    <SectionHead>What I work with</SectionHead>
 
-    <div
-      :ref="(el) => (headerEl = el as HTMLElement)"
-      class="mb-14 transition-opacity duration-500 sm:mb-16 lg:mb-20"
-      :class="headerVisible ? 'opacity-100' : 'opacity-0'"
-    >
-      <div class="font-code text-fg3 mb-3 text-[12px] tracking-[0.1em]">
-        <span class="text-accent">01</span> / 04
-      </div>
-      <h2
-        class="text-[clamp(36px,5vw,72px)] leading-none font-bold tracking-[-0.04em]"
-      >
-        Tech<br />Stack<span class="text-accent">.</span>
-      </h2>
-    </div>
-
-    <div
-      class="grid max-w-[1100px] grid-cols-1 gap-10 sm:grid-cols-[repeat(auto-fit,minmax(280px,1fr))] lg:gap-12"
-    >
+    <dl>
       <div
         v-for="group in groups"
         :key="group.title"
-        :ref="(el) => (group.el.value = el as HTMLElement)"
-        :style="{
-          opacity: group.visible.value ? 1 : 0,
-          transform: group.visible.value ? 'translateY(0)' : 'translateY(20px)',
-          transition: `opacity 0.6s ${group.delay}s ease, transform 0.6s ${group.delay}s ease`,
-        }"
+        v-reveal
+        class="border-rule grid gap-x-10 gap-y-1 border-b py-5 lg:grid-cols-[minmax(0,12rem)_minmax(0,1fr)] lg:items-baseline"
       >
-        <div
-          class="font-code text-accent mb-4 text-[11px] tracking-[0.15em] uppercase"
-        >
-          <span class="text-fg3">// </span>{{ group.title }}
-        </div>
-        <div class="flex flex-wrap gap-2">
-          <span
-            v-for="item in group.items"
-            :key="item"
-            class="font-code text-fg2 bg-bg2 hover:border-accent hover:text-accent hover:bg-accent-dim cursor-default rounded-[4px] border border-[var(--border)] px-[14px] py-[7px] text-[13px] whitespace-nowrap transition-all select-none"
-          >
-            {{ item }}
+        <dt class="label">{{ group.title }}</dt>
+        <dd class="text-[1.0625rem] leading-[1.7]">
+          <span v-for="(item, i) in group.items" :key="item" class="text-fg2">
+            <span class="text-fg">{{ item }}</span
+            ><span v-if="i < group.items.length - 1" class="text-fg3">, </span>
           </span>
-        </div>
+        </dd>
       </div>
-    </div>
+    </dl>
   </section>
 </template>

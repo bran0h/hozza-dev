@@ -1,20 +1,13 @@
 <template>
-  <div class="bg-bg text-fg min-h-screen overflow-x-hidden">
-    <div class="scanline" aria-hidden="true" />
-    <SiteNav>
-      <NuxtLink
-        to="/blog"
-        class="text-fg2 hover:text-accent font-code text-[13px] no-underline transition-colors"
-      >
-        ./blog
-      </NuxtLink>
-    </SiteNav>
-
-    <HomeHeroSection />
-    <HomeStackSection />
-    <HomeProjectsSection />
-    <HomeHobbyProjectsSection />
-    <HomeContactSection />
+  <div class="text-fg min-h-screen">
+    <SiteNav />
+    <main>
+      <HomeHeroSection />
+      <HomeProjectsSection />
+      <HomeHobbyProjectsSection />
+      <HomeStackSection />
+      <HomeContactSection />
+    </main>
     <SiteFooter />
   </div>
 </template>

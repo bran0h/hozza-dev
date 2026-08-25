@@ -1,131 +1,247 @@
+/* ── Tokens ──────────────────────────────────────────────────────────────────
+   Paper by default, ink after dark. Warm neutrals throughout — nothing here is
+   pure #fff or #000, which is most of why it reads as printed rather than lit. */
+
 :root,
-html.dark {
-  --bg: #07090e;
-  --bg2: #0d1018;
-  --bg3: #131720;
-  --fg: #e2e6f0;
-  --fg2: #8a90a0;
-  --fg3: #454c5e;
-  --primary: oklch(0.78 0.18 145);
-  --accent: var(--primary);
-  --primary-dim: color-mix(in srgb, var(--primary) 18%, transparent);
-  --primary-mid: color-mix(in srgb, var(--primary) 42%, transparent);
-  --accent-dim: color-mix(in srgb, var(--accent) 18%, transparent);
-  --accent-mid: color-mix(in srgb, var(--accent) 42%, transparent);
-  --border: rgba(255, 255, 255, 0.07);
-  --font-display: "Space Grotesk", sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
+html.light {
+  --bg: #faf8f3;
+  --bg2: #f2eee5;
+  --bg3: #e9e4d7;
+  --fg: #1a1916;
+  --fg2: #54514a;
+  --fg3: #8d8779;
+  --primary: #94381f;
+  --primary-dim: color-mix(in srgb, var(--primary) 12%, transparent);
+  --primary-mid: color-mix(in srgb, var(--primary) 40%, transparent);
+  --border: rgba(26, 25, 22, 0.14);
+  --border-strong: rgba(26, 25, 22, 0.32);
+
+  --font-display: "Instrument Serif", "Newsreader", Georgia, serif;
+  --font-body: "Newsreader", Georgia, "Times New Roman", serif;
+  --font-meta: "Inter Tight", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Reading measure, reused by prose and every intro paragraph. */
+  --measure: 34rem;
+
+  /* Game-of-Life field: rgb triplet + its ceiling opacity, read by AppLife. */
+  --life-ink: 26 25 22;
+  --life-alpha: 0.055;
 }
 
-html.light {
-  --bg: #f5f6fa;
-  --bg2: #eceef5;
-  --bg3: #e2e4ee;
-  --fg: #0d1018;
-  --fg2: #454c5e;
-  --fg3: #8a90a0;
-  --primary: oklch(0.52 0.18 145);
-  --accent: var(--primary);
-  --primary-dim: color-mix(in srgb, var(--primary) 14%, transparent);
-  --primary-mid: color-mix(in srgb, var(--primary) 38%, transparent);
-  --accent-dim: color-mix(in srgb, var(--accent) 14%, transparent);
-  --accent-mid: color-mix(in srgb, var(--accent) 38%, transparent);
-  --border: rgba(0, 0, 0, 0.08);
+html.dark {
+  --bg: #141310;
+  --bg2: #1c1a16;
+  --bg3: #26231d;
+  --fg: #ece8de;
+  --fg2: #a49d90;
+  --fg3: #6d675c;
+  --primary: #dda15e;
+  --border: rgba(236, 232, 222, 0.15);
+  --border-strong: rgba(236, 232, 222, 0.36);
+  --life-ink: 236 232 222;
+  --life-alpha: 0.075;
 }
+
+/* ── Base ────────────────────────────────────────────────────────────────── */
 
 html {
   scroll-behavior: smooth;
-  overflow: hidden;
-  height: 100%;
+  /* Anchored sections clear the sticky masthead. */
+  scroll-padding-top: 6.5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
   background: var(--bg);
   color: var(--fg);
-  font-family: var(--font-display);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  font-weight: 380;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  height: 100%;
-  overflow: auto;
+  text-rendering: optimizeLegibility;
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 1000;
-  opacity: 0.5;
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1.05;
+  text-wrap: balance;
 }
 
-html.light body::before {
-  opacity: 0.2;
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--primary-dim);
+  color: var(--fg);
 }
 
 ::-webkit-scrollbar {
-  width: 3px;
+  width: 10px;
 }
 ::-webkit-scrollbar-track {
   background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--fg3);
-  border-radius: 2px;
+  background: var(--bg3);
+  border: 3px solid var(--bg);
+  border-radius: 999px;
 }
 
-::selection {
-  background: var(--accent-dim);
-  color: var(--accent);
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 1px;
 }
 
-@keyframes fadeUp {
+/* ── Custom cursor ───────────────────────────────────────────────────────────
+   The class is added by AppCursor only on fine pointers with motion allowed, so
+   the native cursor stays put everywhere else. Text fields keep their caret. */
+
+html.custom-cursor,
+html.custom-cursor * {
+  cursor: none;
+}
+
+html.custom-cursor input:not([type="color"]),
+html.custom-cursor textarea,
+html.custom-cursor [contenteditable="true"] {
+  cursor: auto;
+}
+
+/* ── Editorial primitives ────────────────────────────────────────────────── */
+
+/* The one column everything hangs off — page gutters live here, not per-section. */
+.shell {
+  width: 100%;
+  max-width: 68rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .shell {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Tracked, small, uppercase: section labels, dates, kickers. */
+.label {
+  font-family: var(--font-meta);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg3);
+}
+
+/* Text links: a rule that sits below the baseline, thickening on hover. */
+.link {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 0.22em;
+  transition:
+    text-decoration-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.link:hover {
+  color: var(--primary);
+  text-decoration-color: var(--primary);
+}
+
+/* ── Scroll reveals (driven by the v-reveal directive) ───────────────────────
+   The classes land only on elements that start below the fold, so nothing the
+   reader can already see is hidden and re-shown. --reveal-delay is set per
+   observer batch, which is what makes a group cascade and a lone row snap in. */
+
+.reveal {
+  --reveal-delay: 0ms;
+  --reveal-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal--up {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.65s var(--reveal-ease) var(--reveal-delay),
+    transform 0.65s var(--reveal-ease) var(--reveal-delay);
+}
+
+.reveal--up.reveal--in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hairline that draws out from the left, like a rule being ruled. */
+.reveal--rule {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.9s var(--reveal-ease) var(--reveal-delay);
+}
+
+.reveal--rule.reveal--in {
+  transform: none;
+}
+
+/* Type sliding up out of a clip. The padding/margin pair keeps descenders from
+   being shaved off by the overflow once the element has settled. */
+.reveal--mask {
+  overflow: hidden;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+
+.reveal--mask > * {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 0.85s var(--reveal-ease) var(--reveal-delay);
+}
+
+.reveal--mask.reveal--in > * {
+  transform: none;
+}
+
+@keyframes riseIn {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(0.75rem);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
   }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
-
-@keyframes scanline {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(100vh);
-  }
-}
-
-.scanline {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(transparent, var(--accent-dim), transparent);
-  animation: scanline 8s linear infinite;
-  pointer-events: none;
-  z-index: 999;
 }

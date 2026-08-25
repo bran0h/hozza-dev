@@ -3,7 +3,7 @@ title: Type-Safe APIs with AdonisJS v6
 date: 2025-04-15
 readTime: 10 min read
 tags: [AdonisJS, TypeScript, API]
-excerpt: AdonisJS v6 brings first-class TypeScript support and a completely rethought router.
+summary: AdonisJS v6 brings first-class TypeScript support and a completely rethought router.
 ---
 
 # Type-Safe APIs with AdonisJS v6

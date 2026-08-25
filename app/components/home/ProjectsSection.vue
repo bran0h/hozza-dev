@@ -1,155 +1,157 @@
 <script setup lang="ts">
-const { el: headerEl, visible: headerVisible } = useVisible();
+type Entry = {
+  title: string;
+  desc: string;
+  tags: string[];
+  href?: string;
+};
 
-const projects = [
+const selected: Entry[] = [
   {
     title: "Liftag",
-    desc: "Gym workout tracking app — scan a QR code on any machine to auto-load exercises, log sets, and sync completed workouts to Strava. React Native mobile app backed by an AdonisJS API and a Nuxt gym-owner dashboard.",
+    desc: "Gym workout tracking. Scan the QR code on any machine and the exercise is already loaded — log sets, finish, and the workout syncs to Strava. React Native app, AdonisJS API, Nuxt dashboard for gym owners.",
     tags: ["Expo", "AdonisJS", "PostgreSQL", "Nuxt"],
-    status: "active",
+  },
+  {
+    title: "HozzaCloud",
+    desc: "My own file storage — upload, organise and share files from anywhere, without handing them to somebody else's cloud.",
+    tags: ["Nuxt", "TypeScript", "Self-hosted"],
+    href: "https://cloud.hozza.dev",
+  },
+  {
+    title: "Shufflescape",
+    desc: "Website and course platform for the first shuffle dance school in Bratislava — four levels of classes, schedules and online sign-up, in Slovak and English.",
+    tags: ["Nuxt", "Tailwind CSS", "i18n", "Vercel"],
+    href: "https://shufflescape.com",
   },
   {
     title: "CardioElite",
-    desc: "Cardiology platform for risk assessment and personalized lipid-lowering therapy recommendations",
+    desc: "Cardiology platform for cardiovascular risk assessment and personalised lipid-lowering therapy recommendations.",
     tags: ["TypeScript", "Nuxt", "AdonisJS"],
-    status: "active",
   },
   {
     title: "OVB",
-    desc: "Developing web and mobile apps for financial institutions",
-    tags: ["TypeScript", "Nuxt", "AdonisJS", "LangChain", "Expo", "Monorepo"],
-    status: "active",
+    desc: "Web and mobile apps for financial institutions, built and maintained inside a TypeScript monorepo.",
+    tags: ["Nuxt", "AdonisJS", "Expo", "LangChain", "Monorepo"],
   },
+];
+
+const archive: Entry[] = [
   {
-    title: "dotmemo.xyz",
-    desc: "Sharing tokenized memories with your friends",
-    tags: ["TypeScript", "Nuxt", "Web3", "Cloudflare"],
-    status: "inactive",
+    title: "Tokengram",
+    desc: "Creating and sharing tokenised content, on top of a graph database.",
+    tags: ["Nuxt", "Graph databases", "AI", "Web3"],
   },
   {
     title: "meta-assets",
-    desc: "Polkadot solution for game asset representation on-chain",
-    tags: ["TypeScript", "Nuxt", "Polkadot", "Substrate", "Rust"],
-    status: "inactive",
+    desc: "Polkadot solution for representing game assets on-chain.",
+    tags: ["Polkadot", "Substrate", "Rust"],
+  },
+  {
+    title: "dotmemo.xyz",
+    desc: "Sharing tokenised memories with friends.",
+    tags: ["Nuxt", "Web3", "Cloudflare"],
   },
   {
     title: "Zhar",
-    desc: "Zhar is a social platform for tokenized real-life challenges.",
-    tags: ["TypeScript", "Expo", "Web3", "Ethereum"],
-    status: "inactive",
+    desc: "Social platform for tokenised real-life challenges.",
+    tags: ["Expo", "Web3", "Ethereum"],
   },
   {
     title: "Crypto-estate",
-    desc: "Crypto-estate is a platform for buying and selling real estate with crypto",
-    tags: ["TypeScript", "Nuxt", "Web3", "Cloudflare"],
-    status: "inactive",
+    desc: "Buying and selling real estate with crypto.",
+    tags: ["Nuxt", "Web3", "Cloudflare"],
   },
-  {
-    title: "Tokengram",
-    desc: "Tokengram is a platform for creating and sharing tokenized content",
-    tags: ["TypeScript", "Nuxt", "Graph databases", "AI", "Web3"],
-    status: "inactive",
-  },
-].map((p, i) => {
-  const { el, visible } = useVisible();
-  return { ...p, el, visible, delay: i * 0.12 };
-});
+];
 </script>
 
 <template>
-  <section
-    id="projects"
-    class="bg-bg2 relative px-6 py-24 sm:px-8 sm:py-28 lg:px-12 lg:py-[120px]"
-  >
-    <div
-      class="absolute top-0 right-6 left-6 h-px bg-[var(--border)] sm:right-8 sm:left-8 lg:right-12 lg:left-12"
-    />
+  <section id="work" class="shell scroll-mt-24 pt-20 sm:pt-28">
+    <SectionHead :meta="`${selected.length} projects`">
+      Selected work
+    </SectionHead>
 
-    <div
-      :ref="(el) => (headerEl = el as HTMLElement)"
-      class="mb-12 transition-opacity duration-500 sm:mb-16"
-      :class="headerVisible ? 'opacity-100' : 'opacity-0'"
-    >
-      <div class="font-code text-fg3 mb-3 text-[12px] tracking-[0.1em]">
-        <span class="text-accent">02</span> / 04
-      </div>
-      <h2
-        class="text-[clamp(36px,5vw,72px)] leading-none font-bold tracking-[-0.04em]"
-      >
-        Projects<span class="text-accent">.</span>
-      </h2>
-    </div>
-
-    <div
-      class="grid max-w-[1100px] grid-cols-1 gap-5 sm:gap-6 md:grid-cols-[repeat(auto-fit,minmax(300px,1fr))]"
-    >
-      <div
-        v-for="project in projects"
-        :key="project.title"
-        :ref="(el) => (project.el.value = el as HTMLElement)"
-        class="project-card bg-bg2 relative cursor-default overflow-hidden rounded-[8px] border border-[var(--border)] p-6 sm:p-8"
-        :style="{
-          opacity: project.visible.value ? 1 : 0,
-          transform: project.visible.value
-            ? 'translateY(0)'
-            : 'translateY(24px)',
-          transition: `opacity 0.6s ${project.delay}s ease, transform 0.6s ${project.delay}s ease, border-color 0.2s ease`,
-        }"
-      >
-        <div
-          class="card-overlay pointer-events-none absolute inset-0"
-          aria-hidden="true"
-        />
-
-        <div class="mb-4 flex items-start justify-between">
-          <h3 class="text-[20px] font-semibold tracking-[-0.02em]">
-            {{ project.title }}
+    <ul>
+      <li v-for="entry in selected" :key="entry.title" v-reveal>
+        <component
+          :is="entry.href ? 'a' : 'div'"
+          v-bind="
+            entry.href
+              ? {
+                  href: entry.href,
+                  target: '_blank',
+                  rel: 'noopener noreferrer',
+                }
+              : {}
+          "
+          class="row border-rule grid gap-x-10 gap-y-2 border-b py-6 no-underline sm:py-7 lg:grid-cols-[minmax(0,12rem)_minmax(0,1fr)_minmax(0,12rem)] lg:items-baseline"
+          :class="entry.href ? 'row--link' : ''"
+        >
+          <h3 class="text-[1.5rem] leading-tight sm:text-[1.75rem]">
+            <span class="row-title">{{ entry.title }}</span>
+            <span v-if="entry.href" class="arrow text-fg3 ml-1.5 text-[0.6em]"
+              >↗</span
+            >
           </h3>
-          <span
-            class="font-code rounded-[20px] px-[10px] py-[3px] text-[11px]"
-            :class="
-              project.status === 'active'
-                ? 'bg-accent-dim text-accent border-accent-mid border'
-                : 'bg-bg3 text-fg3 border border-[var(--border)]'
-            "
-          >
-            {{ project.status }}
-          </span>
-        </div>
 
-        <p class="text-fg2 mb-6 text-[14px] leading-[1.7]">
-          {{ project.desc }}
-        </p>
+          <p class="text-fg2 leading-[1.6]">{{ entry.desc }}</p>
 
-        <div class="flex flex-wrap gap-2">
-          <span
-            v-for="tag in project.tags"
-            :key="tag"
-            class="font-code text-fg3 bg-bg3 rounded-[3px] px-[10px] py-[4px] text-[11px]"
-            >{{ tag }}</span
+          <p
+            class="font-meta text-fg3 text-[0.78125rem] leading-[1.55] tracking-wide text-balance"
           >
-        </div>
-      </div>
+            {{ tagList(entry.tags) }}
+          </p>
+        </component>
+      </li>
+    </ul>
+
+    <!-- Older things, kept as a compact index rather than a second card grid. -->
+    <div class="mt-16 sm:mt-20">
+      <SectionHead meta="Archived" size="sm">Previously</SectionHead>
+
+      <ul>
+        <li
+          v-for="entry in archive"
+          :key="entry.title"
+          v-reveal
+          class="border-rule grid gap-x-10 gap-y-1 border-b py-4 lg:grid-cols-[minmax(0,12rem)_minmax(0,1fr)_minmax(0,12rem)] lg:items-baseline"
+        >
+          <h3 class="text-fg2 text-[1.1875rem] leading-tight">
+            {{ entry.title }}
+          </h3>
+          <p class="text-fg2 text-[0.9375rem] leading-[1.6]">
+            {{ entry.desc }}
+          </p>
+
+          <p
+            class="font-meta text-fg3 text-[0.75rem] leading-[1.55] tracking-wide text-balance"
+          >
+            {{ tagList(entry.tags) }}
+          </p>
+        </li>
+      </ul>
     </div>
   </section>
 </template>
 
 <style scoped>
-.project-card:hover {
-  border-color: rgba(255, 255, 255, 0.12);
+.row-title {
+  transition: color 0.15s ease;
 }
 
-html.light .project-card:hover {
-  border-color: rgba(0, 0, 0, 0.18);
+.row--link:hover .row-title {
+  color: var(--primary);
 }
 
-.card-overlay {
-  background: linear-gradient(135deg, var(--accent-dim) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.2s;
+.arrow {
+  transition:
+    transform 0.2s ease,
+    color 0.15s ease;
+  display: inline-block;
 }
 
-.project-card:hover .card-overlay {
-  opacity: 1;
+.row--link:hover .arrow {
+  color: var(--primary);
+  transform: translate(2px, -2px);
 }
 </style>

@@ -1,115 +1,68 @@
 <script setup lang="ts">
-const { el: headerEl, visible: headerVisible } = useVisible();
-
 const projects = [
   {
     title: "Opti-Music",
-    desc: "Play music with your hands — uses your webcam and MediaPipe hand tracking to detect finger distance and map it to notes in real time. No instrument needed.",
-    tags: ["Nuxt", "TypeScript", "MediaPipe", "Tone.js"],
+    desc: "Play music with your hands. The webcam tracks your fingers through MediaPipe, the distance between them becomes a note. No instrument required.",
+    tags: ["Nuxt", "MediaPipe", "Tone.js"],
     url: "https://opti-music.hozza.dev/",
   },
   {
     title: "Quantumania",
-    desc: "Learn & Try quantum computing straight from your browser",
+    desc: "Learn and try quantum computing straight from the browser — gates, circuits and state vectors you can poke at.",
     tags: ["Nuxt", "TypeScript"],
     url: "https://quantumania.hozza.dev/",
   },
-].map((p, i) => {
-  const { el, visible } = useVisible();
-  return { ...p, el, visible, delay: i * 0.12 };
-});
+];
 </script>
 
 <template>
-  <section
-    id="hobby-projects"
-    class="bg-bg2 relative px-6 py-24 sm:px-8 sm:py-28 lg:px-12 lg:py-[120px]"
-  >
-    <div
-      class="absolute top-0 right-6 left-6 h-px bg-[var(--border)] sm:right-8 sm:left-8 lg:right-12 lg:left-12"
-    />
+  <section id="play" class="shell scroll-mt-24 pt-20 sm:pt-28">
+    <SectionHead meta="Live">Things I made for fun</SectionHead>
 
-    <div
-      :ref="(el) => (headerEl = el as HTMLElement)"
-      class="mb-12 transition-opacity duration-500 sm:mb-16"
-      :class="headerVisible ? 'opacity-100' : 'opacity-0'"
-    >
-      <div class="font-code text-fg3 mb-3 text-[12px] tracking-[0.1em]">
-        <span class="text-accent">03</span> / 04
-      </div>
-      <h2
-        class="text-[clamp(36px,5vw,72px)] leading-none font-bold tracking-[-0.04em]"
-      >
-        Hobby projects<span class="text-accent">.</span>
-      </h2>
-    </div>
-
-    <div
-      class="grid max-w-[1100px] grid-cols-1 gap-5 sm:gap-6 md:grid-cols-[repeat(auto-fit,minmax(300px,1fr))]"
-    >
-      <a
-        v-for="project in projects"
-        :key="project.title"
-        :ref="(el) => (project.el.value = el as HTMLElement)"
-        :href="project.url"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="project-card bg-bg2 relative overflow-hidden rounded-[8px] border border-[var(--border)] p-6 no-underline sm:p-8"
-        :style="{
-          opacity: project.visible.value ? 1 : 0,
-          transform: project.visible.value
-            ? 'translateY(0)'
-            : 'translateY(24px)',
-          transition: `opacity 0.6s ${project.delay}s ease, transform 0.6s ${project.delay}s ease, border-color 0.2s ease`,
-        }"
-      >
-        <div
-          class="card-overlay pointer-events-none absolute inset-0"
-          aria-hidden="true"
-        />
-
-        <div class="mb-4 flex items-start justify-between">
-          <h3 class="text-fg text-[20px] font-semibold tracking-[-0.02em]">
-            {{ project.title }}
+    <ul>
+      <li v-for="project in projects" :key="project.title" v-reveal>
+        <a
+          :href="project.url"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="row border-rule grid gap-x-10 gap-y-2 border-b py-6 no-underline sm:py-7 lg:grid-cols-[minmax(0,12rem)_minmax(0,1fr)_minmax(0,12rem)] lg:items-baseline"
+        >
+          <h3 class="text-[1.5rem] leading-tight sm:text-[1.75rem]">
+            <span class="row-title">{{ project.title }}</span>
+            <span class="arrow text-fg3 ml-1.5 text-[0.6em]">↗</span>
           </h3>
-          <span class="font-code text-fg3 flex items-center gap-1 text-[11px]">
-            ↗
-          </span>
-        </div>
 
-        <p class="text-fg2 mb-6 text-[14px] leading-[1.7]">
-          {{ project.desc }}
-        </p>
+          <p class="text-fg2 leading-[1.6]">{{ project.desc }}</p>
 
-        <div class="flex flex-wrap gap-2">
-          <span
-            v-for="tag in project.tags"
-            :key="tag"
-            class="font-code text-fg3 bg-bg3 rounded-[3px] px-[10px] py-[4px] text-[11px]"
-            >{{ tag }}</span
+          <p
+            class="font-meta text-fg3 text-[0.78125rem] leading-[1.55] tracking-wide text-balance"
           >
-        </div>
-      </a>
-    </div>
+            {{ tagList(project.tags) }}
+          </p>
+        </a>
+      </li>
+    </ul>
   </section>
 </template>
 
 <style scoped>
-.project-card:hover {
-  border-color: rgba(255, 255, 255, 0.12);
+.row-title,
+.arrow {
+  transition:
+    color 0.15s ease,
+    transform 0.2s ease;
 }
 
-html.light .project-card:hover {
-  border-color: rgba(0, 0, 0, 0.18);
+.arrow {
+  display: inline-block;
 }
 
-.card-overlay {
-  background: linear-gradient(135deg, var(--accent-dim) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.2s;
+.row:hover .row-title,
+.row:hover .arrow {
+  color: var(--primary);
 }
 
-.project-card:hover .card-overlay {
-  opacity: 1;
+.row:hover .arrow {
+  transform: translate(2px, -2px);
 }
 </style>

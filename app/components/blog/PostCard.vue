@@ -5,92 +5,47 @@ defineProps<{
     date: string;
     readTime: string;
     tags: string[];
-    excerpt: string;
+    summary: string;
     path: string;
   };
-  index: number;
-  visible: boolean;
 }>();
 </script>
 
 <template>
-  <article
-    class="post-card bg-bg2 relative flex cursor-pointer flex-col gap-4 overflow-hidden rounded-[8px] border border-[var(--border)] p-6 sm:p-8"
-    :class="{ 'post-card--visible': visible }"
-    :style="{ '--delay': `${index * 0.08}s` }"
-  >
+  <article v-reveal class="post border-rule border-b">
     <NuxtLink
       :to="post.path"
-      class="absolute inset-0 z-[1]"
-      :aria-label="`Read ${post.title}`"
-    />
-    <div
-      class="card-overlay pointer-events-none absolute inset-0"
-      aria-hidden="true"
-    />
-
-    <div class="font-code text-fg3 flex items-center gap-2 text-[11px]">
-      <span>{{ post.date }}</span>
-      <span>·</span>
-      <span>{{ post.readTime }}</span>
-    </div>
-
-    <h2
-      class="text-fg text-[20px] leading-[1.3] font-semibold tracking-[-0.02em]"
+      class="grid gap-x-10 gap-y-2 py-6 no-underline sm:py-7 lg:grid-cols-[minmax(0,10rem)_minmax(0,1fr)_minmax(0,12rem)] lg:items-baseline"
     >
-      {{ post.title }}
-    </h2>
+      <!-- Date column doubles as the index rail on wide screens. -->
+      <p class="label whitespace-nowrap">
+        {{ post.date }}
+      </p>
 
-    <p class="text-fg2 line-clamp-3 flex-1 text-[14px] leading-[1.7]">
-      {{ post.excerpt }}
-    </p>
-
-    <div
-      class="mt-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
-    >
-      <div class="flex flex-wrap gap-1.5">
-        <span
-          v-for="tag in post.tags"
-          :key="tag"
-          class="font-code text-fg3 bg-bg3 rounded-[3px] px-[10px] py-[3px] text-[11px]"
-          >{{ tag }}</span
+      <div>
+        <h2
+          class="post-title mb-2 text-[1.5rem] leading-tight sm:text-[1.875rem]"
         >
+          {{ post.title }}
+        </h2>
+        <p class="text-fg2 leading-[1.6]">{{ post.summary }}</p>
       </div>
-      <span
-        class="post-more font-code text-accent text-[12px] whitespace-nowrap"
-        >read more →</span
+
+      <p
+        class="font-meta text-fg3 text-[0.78125rem] leading-[1.55] tracking-wide text-balance"
       >
-    </div>
+        {{ post.readTime }}&nbsp;· {{ tagList(post.tags) }}
+      </p>
+    </NuxtLink>
   </article>
 </template>
 
 <style scoped>
-.post-card {
-  opacity: 0;
-  transition: border-color 0.2s ease;
+.post-title {
+  transition: color 0.15s ease;
 }
-.post-card--visible {
-  animation: fadeUp 0.6s var(--delay, 0s) ease forwards;
-}
-.post-card:hover {
-  border-color: rgba(255, 255, 255, 0.14);
-}
-html.light .post-card:hover {
-  border-color: rgba(0, 0, 0, 0.18);
-}
-.card-overlay {
-  background: linear-gradient(135deg, var(--accent-dim) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-.post-card:hover .card-overlay {
-  opacity: 1;
-}
-.post-more {
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-.post-card:hover .post-more {
-  opacity: 1;
+
+.post:hover .post-title {
+  color: var(--primary);
 }
 </style>

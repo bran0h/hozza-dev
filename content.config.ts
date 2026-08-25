@@ -12,7 +12,7 @@ export default defineContentConfig({
         ),
         readTime: z.string(),
         tags: z.array(z.string()),
-        excerpt: z.string(),
+        summary: z.string(),
       }),
     }),
   },

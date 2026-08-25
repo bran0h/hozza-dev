@@ -3,7 +3,7 @@ title: Why AdonisJS 7 Is So Cool
 date: 2026-04-30
 readTime: 11 min read
 tags: [AdonisJS, TypeScript, Lucid, API]
-excerpt: Migrations-first schema generation meets a real serialization layer—and your API contract becomes something TypeScript can actually enforce end to end.
+summary: Migrations-first schema generation meets a real serialization layer—and your API contract becomes something TypeScript can actually enforce end to end.
 ---
 
 # Why AdonisJS 7 Is So Cool

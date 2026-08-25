@@ -6,10 +6,17 @@ export default defineNuxtConfig({
   compatibilityDate: "2026-04-28",
   app: {
     head: {
-      title: "hozza.dev",
+      title: "Branislav Hozza — full-stack developer",
       htmlAttrs: {
         lang: "en",
       },
+      meta: [
+        {
+          name: "description",
+          content:
+            "Branislav Hozza — full-stack developer in Slovakia. TypeScript, Nuxt and AdonisJS by day, Rust by night.",
+        },
+      ],
     },
   },
   css: ["~/assets/css/tailwind.css", "~/assets/css/main.css"],
@@ -37,14 +44,17 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   googleFonts: {
     families: {
-      "JetBrains Mono": "200..700",
-      "Space Grotesk": "300..700",
+      // Display serif for headlines, text serif for prose, grotesque for labels.
+      "Instrument Serif": [400],
+      Newsreader: "200..600",
+      "Inter Tight": "400..600",
+      "JetBrains Mono": "400..600",
     },
   },
   colorMode: {
     classSuffix: "",
-    preference: "dark",
-    fallback: "dark",
+    preference: "light",
+    fallback: "light",
   },
   content: {
     highlight: {

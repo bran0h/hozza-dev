@@ -3,7 +3,7 @@ title: "Building Liftag: QR-Powered Gym Tracking"
 date: 2025-07-01
 readTime: 11 min read
 tags: [React Native, AdonisJS, PostgreSQL, Expo]
-excerpt: Frictionless workout logging — scan the QR on any machine and the app already knows what to do.
+summary: Frictionless workout logging — scan the QR on any machine and the app already knows what to do.
 ---
 
 # Building Liftag: QR-Powered Gym Tracking

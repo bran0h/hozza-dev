@@ -13,10 +13,10 @@ onMounted(() => {
 
 const ariaLabel = computed(() =>
   !mounted.value
-    ? "Toggle color theme"
+    ? "Toggle colour theme"
     : isDark.value
-      ? "Switch to light mode"
-      : "Switch to dark mode",
+      ? "Switch to paper"
+      : "Switch to ink",
 );
 </script>
 
@@ -32,31 +32,32 @@ const ariaLabel = computed(() =>
     <svg
       v-else-if="isDark"
       xmlns="http://www.w3.org/2000/svg"
-      width="15"
-      height="15"
+      width="14"
+      height="14"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
+      stroke-width="1.6"
       stroke-linecap="round"
-      stroke-linejoin="round"
+      aria-hidden="true"
     >
-      <circle cx="12" cy="12" r="4" />
+      <circle cx="12" cy="12" r="4.5" />
       <path
-        d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
+        d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M6.2 17.8l-1.6 1.6M19.4 4.6l-1.6 1.6"
       />
     </svg>
     <svg
       v-else
       xmlns="http://www.w3.org/2000/svg"
-      width="15"
-      height="15"
+      width="14"
+      height="14"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
+      stroke-width="1.6"
       stroke-linecap="round"
       stroke-linejoin="round"
+      aria-hidden="true"
     >
       <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
     </svg>
@@ -68,25 +69,23 @@ const ariaLabel = computed(() =>
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 4px;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--fg2);
-  cursor: pointer;
-  transition: all 0.2s;
+  width: 1.5rem;
+  height: 1.5rem;
   padding: 0;
+  border: none;
+  background: none;
+  color: var(--fg3);
+  cursor: pointer;
+  transition: color 0.15s ease;
 }
 
 .theme-toggle:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  color: var(--fg);
 }
 
 .theme-toggle-placeholder {
   display: block;
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
 }
 </style>

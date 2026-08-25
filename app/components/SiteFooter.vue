@@ -1,8 +1,35 @@
 <template>
-  <footer
-    class="font-code text-fg3 flex flex-col items-start justify-between gap-3 border-t border-[var(--border)] px-6 py-8 text-[12px] sm:flex-row sm:items-center sm:px-8 lg:px-12"
-  >
-    <span><span class="text-accent">bran0h</span> · 2026</span>
-    <span>built with <span class="text-accent">♥</span> in Slovakia</span>
+  <footer class="border-rule border-t">
+    <div
+      class="shell flex flex-col gap-6 py-10 sm:flex-row sm:items-baseline sm:justify-between sm:py-12"
+    >
+      <p class="font-display text-[1.125rem] leading-snug">
+        Branislav Hozza
+        <span class="text-fg3">— Bratislava, Slovakia</span>
+      </p>
+
+      <nav class="flex flex-wrap items-baseline gap-x-6 gap-y-2">
+        <a
+          href="https://github.com/bran0h"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="label hover:text-fg no-underline transition-colors"
+          >GitHub</a
+        >
+        <a
+          href="https://cloud.hozza.dev"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="label hover:text-fg no-underline transition-colors"
+          >HozzaCloud</a
+        >
+        <NuxtLink
+          to="/blog"
+          class="label hover:text-fg no-underline transition-colors"
+          >Writing</NuxtLink
+        >
+        <span class="label">© {{ new Date().getFullYear() }}</span>
+      </nav>
+    </div>
   </footer>
 </template>

@@ -3,7 +3,7 @@ title: Building a Game Engine in Rust
 date: 2025-06-12
 readTime: 8 min read
 tags: [Rust, Bevy, ECS]
-excerpt: Embarking on a game engine from scratch is equal parts humbling and exhilarating.
+summary: Embarking on a game engine from scratch is equal parts humbling and exhilarating.
 ---
 
 # Building a Game Engine in Rust

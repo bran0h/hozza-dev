@@ -1,13 +1,25 @@
-import { refreshTerminalFavicon } from "../../utils/terminal-favicon";
+import { refreshFavicon } from "../../utils/favicon";
 
 const STORAGE_KEY = "hozza-dev:tweak-colors";
-const DEFAULT_PRIMARY_DARK_HEX = "#fff700";
-const DEFAULT_PRIMARY_LIGHT_HEX = "#bd0000";
+const DEFAULT_PRIMARY_DARK_HEX = "#dda15e";
+const DEFAULT_PRIMARY_LIGHT_HEX = "#94381f";
 
-function rgbToHex(rgb: string): string | null {
-  const m = rgb.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
-  if (!m) return null;
-  const [, r, g, b] = m;
+/** Custom properties come back as authored, so accept hex as well as rgb(). */
+function toHex(value: string): string | null {
+  const hex = value.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
+  if (hex) {
+    const h = hex[1]!;
+    return h.length === 3
+      ? `#${h
+          .split("")
+          .map((c) => c + c)
+          .join("")}`.toLowerCase()
+      : `#${h.toLowerCase()}`;
+  }
+
+  const rgb = value.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
+  if (!rgb) return null;
+  const [, r, g, b] = rgb;
   return `#${[r, g, b].map((x) => Number(x).toString(16).padStart(2, "0")).join("")}`;
 }
 
@@ -33,7 +45,7 @@ function readPrimaryHexWithHtmlClass(mode: "dark" | "light"): string {
   el.classList.add(mode === "dark" ? "dark" : "light");
   void el.offsetHeight;
   const raw = getComputedStyle(el).getPropertyValue("--primary").trim();
-  const hex = rgbToHex(raw);
+  const hex = toHex(raw);
   restoreHtmlThemeClasses(had);
   return (
     hex ??
@@ -64,7 +76,7 @@ export function useTweakColors() {
       "--primary",
       isEffectiveDark() ? primaryDarkHex.value : primaryLightHex.value,
     );
-    refreshTerminalFavicon();
+    refreshFavicon();
   }
 
   function persist() {
@@ -143,7 +155,7 @@ export function useTweakColors() {
     syncPickersFromCss();
     const hadSaved = load();
     if (hadSaved) applyPrimaryForCurrentMode();
-    else refreshTerminalFavicon();
+    else refreshFavicon();
     hydrated.value = true;
   });
 
