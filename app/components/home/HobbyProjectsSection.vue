@@ -30,6 +30,12 @@ const projects = [
     tags: ["Nuxt", "TypeScript"],
     url: "https://satisfactory-planner-one.vercel.app/",
   },
+  {
+    title: "PDF Tools",
+    desc: "A personal PDF toolbox. Compress, OCR, convert Office files to PDF and PDF to Word, with the light tools running right in the browser.",
+    tags: ["Nuxt", "AdonisJS", "Supabase"],
+    url: "https://pdf.hozza.dev/",
+  },
 ];
 </script>
 
