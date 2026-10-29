@@ -12,6 +12,24 @@ const projects = [
     tags: ["Nuxt", "TypeScript"],
     url: "https://quantumania.hozza.dev/",
   },
+  {
+    title: "Better Mahjong",
+    desc: "A Balatro-style roguelike built on mahjong solitaire. Beat the blinds with pairs, chows and pongs, collect relics and upgrade your tiles to break the score.",
+    tags: ["Nuxt", "TypeScript"],
+    url: "https://web-ruby-beta-9b0n1zsi48.vercel.app/",
+  },
+  {
+    title: "Farmtastic",
+    desc: "A Farmville-style pixel-art farming game that runs in the browser. Plant crops, run machines and level up your farm.",
+    tags: ["Rust", "Bevy", "Axum"],
+    url: "https://farmtastic.hozza.dev/",
+  },
+  {
+    title: "Forge",
+    desc: "A Satisfactory production planner. Pick what you want to build and get the machines, splitter and merger wiring, a step-by-step build guide and a parts list.",
+    tags: ["Nuxt", "TypeScript"],
+    url: "https://satisfactory-planner-one.vercel.app/",
+  },
 ];
 </script>
 
