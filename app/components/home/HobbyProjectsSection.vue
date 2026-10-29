@@ -16,7 +16,7 @@ const projects = [
     title: "Better Mahjong",
     desc: "A Balatro-style roguelike built on mahjong solitaire. Beat the blinds with pairs, chows and pongs, collect relics and upgrade your tiles to break the score.",
     tags: ["Nuxt", "TypeScript"],
-    url: "https://web-ruby-beta-9b0n1zsi48.vercel.app/",
+    url: "https://bm.hozza.dev/",
   },
   {
     title: "Farmtastic",
