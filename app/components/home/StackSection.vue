@@ -10,8 +10,6 @@ const groups = [
     items: [
       "AdonisJS",
       "Express",
-      "LangChain",
-      "AWS Bedrock",
       "PostgreSQL",
       "Supabase",
       "MSSQL",
@@ -20,6 +18,10 @@ const groups = [
       "Axum",
       "Actix",
     ],
+  },
+  {
+    title: "AI",
+    items: ["AWS Bedrock", "LangChain", "OpenRouter", "RAG", "Docling", "LinkUp"],
   },
   {
     title: "Infrastructure",
